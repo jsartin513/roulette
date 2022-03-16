@@ -1,21 +1,41 @@
 <template>
-  <div class="content">
-    <div :v-if="slices">
-      <highcharts :options="chartOptions" />
+  <div class="content flex flex-row">
+    <div class="column">
+      <h2 class="text-lg text-center border-t-2 border-b-2">
+        Bet types
+      </h2>
+      <div class="flex flex-wrap m-2">
+        <div class="bet-type">Boom Boom 00</div>
+        <div class="bet-type">Green</div>
+        <div class="bet-type">Green++</div>
+        <div class="bet-type">5 Across</div>
+        <div class="bet-type">7 Across</div>
+        <div class="bet-type">3 Bell Curve</div>
+        <div class="bet-type">5 Bell Curve</div>
+        <div class="bet-type">5 Slant Curve</div>
+      </div>
+    </div>
+    <div class="column">
+      <h2 class="text-lg text-center border-t-2 border-b-2">
+        Vizualization
+      </h2>
+      <div :v-if="slices">
+        <highcharts :options="chartOptions" />
+      </div>
     </div>
   </div>
 </template>
 <script>
 import { Chart } from 'highcharts-vue'
-import Highcharts from "highcharts";
-import exportingInit from "highcharts/modules/exporting";
-import highchartsMoreInit from "highcharts/highcharts-more";
-import solidGaugeInit from "highcharts/modules/solid-gauge";
+import Highcharts from 'highcharts'
+import exportingInit from 'highcharts/modules/exporting'
+import highchartsMoreInit from 'highcharts/highcharts-more'
+import solidGaugeInit from 'highcharts/modules/solid-gauge'
 import { createSlices } from '../static/slices'
 
-exportingInit(Highcharts);
-highchartsMoreInit(Highcharts);
-solidGaugeInit(Highcharts);
+exportingInit(Highcharts)
+highchartsMoreInit(Highcharts)
+solidGaugeInit(Highcharts)
 
 export default {
   name: 'RouletteWheel',
@@ -28,7 +48,11 @@ export default {
   computed: {
     chartOptions() {
       const seriesData = this.slices.map((slice) => {
-        return { name: this.convertSliceNumber(slice.number), y: 100 / 38, color: slice.color }
+        return {
+          name: this.convertSliceNumber(slice.number),
+          y: 100 / 38,
+          color: slice.color,
+        }
       })
       return {
         chart: {
@@ -40,7 +64,7 @@ export default {
           plotShadow: false,
         },
         tooltip: false,
-        title: { text: 'Roulette Wheel' },
+        title: null,
         plotOptions: {
           pie: {
             allowPointSelect: false,
@@ -48,7 +72,7 @@ export default {
               enabled: true,
               format: '{point.name}',
               style: { color: '#FFFFFF' },
-              distance: -10
+              distance: -10,
             },
           },
         },
@@ -63,17 +87,34 @@ export default {
     initSlices() {
       this.slices = createSlices()
     },
-    convertSliceNumber(number){
-      if (number === 100){
-        return "00";
-      } 
+    convertSliceNumber(number) {
+      if (number === 100) {
+        return '00'
+      }
       return number.toString()
-    }
+    },
   },
 }
 </script>
 
 <style scoped>
+.column {
+  margin: 1em 4em;
+}
+
+.bet-type {
+  padding: 1em;
+  margin: 1em;
+  width: 25%;
+  border-radius: 0.5em;
+  text-align: center;
+  font-weight: 600;
+  border-color: black;
+  border-width: 2px;
+  background-color: lightgray;
+  color: darkgreen;
+}
+
 .highcharts-figure,
 .highcharts-data-table table {
   min-width: 420px;
