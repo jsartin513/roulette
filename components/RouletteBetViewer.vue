@@ -10,8 +10,6 @@ import { createSlices } from '../static/slices'
 import HighchartsPanel from './HighchartsPanel'
 import BetTypePanel from './BetTypePanel'
 
-
-
 export default {
   name: 'RouletteWheel',
   components: {
@@ -19,9 +17,13 @@ export default {
     betTypes: BetTypePanel
   },
   data() {
-    return { slices: null, betTypes: null, selectedBetType: null }
+    return { slices: null, betTypes: null }
   },
-  
+  computed: {
+    selectedBetType() {
+      return this.betTypes.find((betType) => betType.selected === true);
+    }
+  },
   created() {
     this.initSlices()
     this.initBetTypes()
