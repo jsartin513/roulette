@@ -1,15 +1,15 @@
 <template>
   <div>
     <h1 class="m-4 text-center text-xl">Roulette bets</h1>
-    <roulette-wheel />
+    <roulette-bet-viewer />
   </div>
 </template>
 
 <script>
-import RouletteWheel from '../components/HighchartsWheel'
+import RouletteBetViewer from '../components/RouletteBetViewer'
 
 export default {
   name: 'IndexPage',
-  components: { RouletteWheel },
+  components: { RouletteBetViewer },
 }
 </script>

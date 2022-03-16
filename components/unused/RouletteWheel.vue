@@ -16,7 +16,7 @@
   </div>
 </template>
 <script>
-import { createSlices } from '../static/slices'
+import { createSlices } from '../../static/slices'
 
 export default {
   name: 'RouletteWheel',
