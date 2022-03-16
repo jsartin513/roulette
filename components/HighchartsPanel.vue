@@ -25,6 +25,7 @@ export default {
   components: { highcharts: Chart },
   props: {
     slices: { type: Array, default: null },
+    selectedSpaces: { type: Array, default: null } 
   },
   computed: {
     chartOptions() {

@@ -1,7 +1,7 @@
 <template>
   <div class="content flex flex-row">
     <betTypes :bet-types="betTypes" @selectBetType="selectBetType" />
-    <highcharts :slices="slices" />
+    <highcharts :slices="slices" :selected-spaces="selectedSpaces" />
     
   </div>
 </template>
@@ -22,6 +22,9 @@ export default {
   computed: {
     selectedBetType() {
       return this.betTypes.find((betType) => betType.selected === true);
+    },
+    selectedSpaces() {
+      return this.selectedBetType.spaces;
     }
   },
   created() {
@@ -31,8 +34,8 @@ export default {
   methods: {
     initBetTypes() {
       this.betTypes = [
-        { name: 'Boom 00', selected: true },
-        { name: 'Green', selected: false },
+        { name: 'Boom 00', selected: true, spaces: ['00'] },
+        { name: 'Green', selected: false, spaces: ['00', '0'] },
         { name: 'Green++', selected: false },
         { name: '5 Across', selected: false },
         { name: '5 Bell Curve', selected: false },
