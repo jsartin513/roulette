@@ -32,6 +32,8 @@ export default {
       })
       return {
         chart: {
+          height: 600,
+          width: 600,
           type: 'pie',
           plotBackgroundColor: null,
           plotBorderWidth: null,
