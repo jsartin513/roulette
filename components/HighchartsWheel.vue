@@ -5,14 +5,14 @@
         Bet types
       </h2>
       <div class="flex flex-wrap m-2">
-        <div class="bet-type">Boom Boom 00</div>
-        <div class="bet-type">Green</div>
-        <div class="bet-type">Green++</div>
-        <div class="bet-type">5 Across</div>
-        <div class="bet-type">7 Across</div>
-        <div class="bet-type">3 Bell Curve</div>
-        <div class="bet-type">5 Bell Curve</div>
-        <div class="bet-type">5 Slant Curve</div>
+        <div
+          v-for="(betType, index) in betTypes"
+          :key="index"
+          :class="`bet-type ${betType.selected && 'selected-bet'}`"
+          @click="selectBetType(index)"
+        >
+          {{ betType.name }}
+        </div>
       </div>
     </div>
     <div class="column">
@@ -43,14 +43,14 @@ export default {
     highcharts: Chart,
   },
   data() {
-    return { slices: [] }
+    return { slices: null, betTypes: null, selectedBetType: null }
   },
   computed: {
     chartOptions() {
       const seriesData = this.slices.map((slice) => {
         return {
           name: this.convertSliceNumber(slice.number),
-          y: 100 / 38,
+          y: 1,
           color: slice.color,
         }
       })
@@ -82,8 +82,22 @@ export default {
   },
   created() {
     this.initSlices()
+    this.initBetTypes()
   },
   methods: {
+    initBetTypes() {
+      this.betTypes = [
+        { name: 'Boom 00', selected: true },
+        { name: 'Green', selected: false },
+        { name: 'Green++', selected: false },
+        { name: '5 Across', selected: false },
+        { name: '5 Bell Curve', selected: false },
+        { name: '3 Bell Curve', selected: false },
+        { name: '7 Across', selected: false },
+        { name: '7 Slant Curve', selected: false },
+        { name: '7 Bell Curve', selected: false },
+      ]
+    },
     initSlices() {
       this.slices = createSlices()
     },
@@ -92,6 +106,15 @@ export default {
         return '00'
       }
       return number.toString()
+    },
+    selectBetType(index) {
+      this.betTypes.forEach((betType, idx) => {
+        if (index === idx) {
+          betType.selected = true
+        } else {
+          betType.selected = false
+        }
+      })
     },
   },
 }
@@ -114,7 +137,12 @@ export default {
   background-color: lightgray;
   color: darkgreen;
 }
-
+.selected-bet {
+  color: white;
+  background-color: darkgreen;
+  border-color: lightgray;
+  border-style: dashed;
+}
 .highcharts-figure,
 .highcharts-data-table table {
   min-width: 420px;
