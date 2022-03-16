@@ -67,7 +67,7 @@ export default {
         title: null,
         plotOptions: {
           pie: {
-            allowPointSelect: false,
+            allowPointSelect: true,
             dataLabels: {
               enabled: true,
               format: '{point.name}',
