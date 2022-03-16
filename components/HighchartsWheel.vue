@@ -28,7 +28,7 @@ export default {
   computed: {
     chartOptions() {
       const seriesData = this.slices.map((slice) => {
-        return { name: slice.number.toString(), y: 100 / 38, color: slice.color }
+        return { name: this.convertSliceNumber(slice.number), y: 100 / 38, color: slice.color }
       })
       return {
         chart: {
@@ -37,12 +37,16 @@ export default {
           plotBorderWidth: null,
           plotShadow: false,
         },
+        tooltip: false,
         title: { text: 'Roulette Wheel' },
         plotOptions: {
           pie: {
+            allowPointSelect: false,
             dataLabels: {
               enabled: true,
               format: '{point.name}',
+              style: { color: '#FFFFFF' },
+              distance: -10
             },
           },
         },
@@ -57,6 +61,12 @@ export default {
     initSlices() {
       this.slices = createSlices()
     },
+    convertSliceNumber(number){
+      if (number === 100){
+        return "00";
+      } 
+      return number.toString()
+    }
   },
 }
 </script>
@@ -64,7 +74,7 @@ export default {
 <style scoped>
 .highcharts-figure,
 .highcharts-data-table table {
-  min-width: 320px;
+  min-width: 420px;
   max-width: 800px;
   margin: 1em auto;
 }
