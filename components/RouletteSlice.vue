@@ -8,8 +8,8 @@
 export default {
   name: 'RouletteSlice',
   props: {
-    number: Number,
-    color: String,
+    number: { type: Number, default: 99 },
+    color: { type: String, default: 'yellow' },
   },
   methods: {
     checkedNumber(num) {
