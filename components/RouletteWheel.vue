@@ -16,7 +16,7 @@
   </div>
 </template>
 <script>
-// import RouletteSlice from './RouletteSlice'
+import { createSlices } from '../static/slices'
 
 export default {
   name: 'RouletteWheel',
@@ -29,44 +29,7 @@ export default {
   },
   methods: {
     initSlices() {
-      this.slices.push({ color: 'green', number: 0 })
-      this.slices.push({ color: 'black', number: 2 })
-      this.slices.push({ color: 'red', number: 14 })
-      this.slices.push({ color: 'black', number: 35 })
-      this.slices.push({ color: 'red', number: 23 })
-      this.slices.push({ color: 'black', number: 4 })
-      this.slices.push({ color: 'red', number: 16 })
-      this.slices.push({ color: 'black', number: 33 })
-      this.slices.push({ color: 'red', number: 21 })
-      this.slices.push({ color: 'black', number: 6 })
-      this.slices.push({ color: 'red', number: 18 })
-      this.slices.push({ color: 'black', number: 31 })
-      this.slices.push({ color: 'red', number: 19 })
-      this.slices.push({ color: 'black', number: 8 })
-      this.slices.push({ color: 'red', number: 12 })
-      this.slices.push({ color: 'black', number: 29 })
-      this.slices.push({ color: 'red', number: 25 })
-      this.slices.push({ color: 'black', number: 10 })
-      this.slices.push({ color: 'red', number: 27 })
-      this.slices.push({ color: 'green', number: 100 })
-      this.slices.push({ color: 'red', number: 1 })
-      this.slices.push({ color: 'black', number: 13 })
-      this.slices.push({ color: 'red', number: 36 })
-      this.slices.push({ color: 'black', number: 24 })
-      this.slices.push({ color: 'red', number: 3 })
-      this.slices.push({ color: 'black', number: 15 })
-      this.slices.push({ color: 'red', number: 34 })
-      this.slices.push({ color: 'black', number: 22 })
-      this.slices.push({ color: 'red', number: 5 })
-      this.slices.push({ color: 'black', number: 17 })
-      this.slices.push({ color: 'red', number: 32 })
-      this.slices.push({ color: 'black', number: 20 })
-      this.slices.push({ color: 'red', number: 7 })
-      this.slices.push({ color: 'black', number: 11 })
-      this.slices.push({ color: 'red', number: 30 })
-      this.slices.push({ color: 'black', number: 26 })
-      this.slices.push({ color: 'red', number: 9 })
-      this.slices.push({ color: 'black', number: 28 })
+      this.slices = createSlices()
     },
   },
 }

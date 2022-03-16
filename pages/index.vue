@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import RouletteWheel from '../components/RouletteWheel'
+import RouletteWheel from '../components/HighchartsWheel'
 
 export default {
   name: 'IndexPage',
