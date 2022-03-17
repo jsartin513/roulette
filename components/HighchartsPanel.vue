@@ -30,10 +30,13 @@ export default {
   computed: {
     chartOptions() {
       const seriesData = this.slices.map((slice) => {
+        const numberAsString = this.convertSliceNumber(slice.number)
+        const isSelected = this.selectedSpaces.findIndex((selectedSpace) => selectedSpace === numberAsString) !== -1
         return {
-          name: this.convertSliceNumber(slice.number),
+          name: numberAsString,
           y: 1,
           color: slice.color,
+          selected: isSelected
         }
       })
       return {
