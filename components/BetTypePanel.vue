@@ -15,9 +15,16 @@
     </div>
     <div>
       <h3 class="text-md text-center border-t border-b m-2">Odds</h3>
-      <div class="odds">Payout: 35:1</div>
-      <div class="odds">Likelihood: 1 in 38</div>
-      <div class="odds">Win requirements: Skip 3 of 37 losses</div>
+      <div class="odds">
+        <span class="label">Payout: </span>{{ currentPayout }}
+      </div>
+      <div class="odds">
+        <span class="label">Likelihood: </span>{{ currentLikelihood }}
+      </div>
+      <div class="odds">
+        <span class="label">Win requirements: </span
+        >{{ currentWinRequiremennts }}
+      </div>
       <p class="odds">How does this work? Lorem ipsum and whatnot.</p>
     </div>
   </div>
@@ -26,7 +33,10 @@
 <script>
 export default {
   name: 'BetTypePanel',
-  props: { betTypes: { type: Array, default: null } },
+  props: {
+    betTypes: { type: Array, default: null },
+    selectedBetType: { type: Object, default: null },
+  },
   computed: {
     possibleBetTypes() {
       const allBets = this.betTypes.map((betType) => {
@@ -38,6 +48,24 @@ export default {
         return betType
       })
       return allBets
+    },
+    currentPayout() {
+      if (this.selectedBetType) {
+        return '35:1'
+      }
+      return ''
+    },
+    currentLikelihood() {
+      if (this.selectedBetType) {
+        return '1 in 38'
+      }
+      return ''
+    },
+    currentWinRequiremennts() {
+      if (this.selectedBetType) {
+        return 'Skip 3 of 37 losses'
+      }
+      return ''
     },
   },
   methods: {
@@ -54,6 +82,11 @@ export default {
 <style scoped>
 .odds {
   margin-left: 0.5em;
+}
+
+.label {
+  font-weight: 800;
+  padding-right: 0.5em;
 }
 
 .bet-type {

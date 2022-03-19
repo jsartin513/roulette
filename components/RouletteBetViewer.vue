@@ -1,6 +1,6 @@
 <template>
   <div class="content flex flex-row">
-    <betTypes :bet-types="betTypes" @selectBetType="selectBetType" />
+    <betTypes :bet-types="betTypes" :selected-bet-type="selectedBetType" @selectBetType="selectBetType" />
     <highcharts :slices="slices" :selected-spaces="selectedSpaces" />
   </div>
 </template>
