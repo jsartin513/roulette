@@ -7,14 +7,14 @@
 <script>
 import { createSlices } from '../static/slices'
 import { createBets } from '../static/bets'
-import HighchartsPanel from './HighchartsPanel'
-import BetTypePanel from './BetTypePanel'
+import HighchartsColumn from './HighchartsColumn'
+import BetTypeColumn from './BetTypeColumn'
 
 export default {
   name: 'RouletteWheel',
   components: {
-    highcharts: HighchartsPanel,
-    betTypes: BetTypePanel,
+    highcharts: HighchartsColumn,
+    betTypes: BetTypeColumn,
   },
   data() {
     return { slices: null, betTypes: null }
