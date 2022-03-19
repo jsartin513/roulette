@@ -16,7 +16,7 @@
     <div>
       <h3 class="text-md text-center border-t border-b m-2">Odds</h3>
       <div class="odds">
-        <span class="label">Payout: </span>{{ currentPayout }}
+        <span class="label">Payout: </span>{{ currenntPotentialPayout }}
       </div>
       <div class="odds">
         <span class="label">Likelihood: </span>{{ currentLikelihood }}
@@ -49,21 +49,30 @@ export default {
       })
       return allBets
     },
-    currentPayout() {
-      if (this.selectedBetType) {
-        return '35:1'
+    canComputePayout() {
+      return this.selectedBetType && this.selectedBetType.spaces.length > 0;
+    },
+    dollarsBet() {
+      return this.selectedBetType.spaces.length;
+    },
+    oddsOnOneSquare(){
+      return 35;
+    },
+    currenntPotentialPayout() {
+      if (this.canComputePayout) {
+        return `${this.oddsOnOneSquare}:1`
       }
       return ''
     },
     currentLikelihood() {
-      if (this.selectedBetType) {
-        return '1 in 38'
+      if (this.canComputePayout) {
+        return `${this.dollarsBet.toString()} / 38`;
       }
       return ''
     },
     currentWinRequiremennts() {
-      if (this.selectedBetType) {
-        return 'Skip 3 of 37 losses'
+      if (this.canComputePayout) {
+        return `Win more than one out of every ${Math.round(this.oddsOnOneSquare / this.dollarsBet)} bets`
       }
       return ''
     },
