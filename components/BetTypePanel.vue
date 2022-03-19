@@ -5,10 +5,12 @@
     </h2>
     <div class="flex flex-wrap m-2">
       <div
-        v-for="(betType, index) in betTypes"
+        v-for="(betType, index) in possibleBetTypes"
         :key="index"
-        :class="`bet-type ${betType.selected && 'selected-bet'}`"
-        @click="$emit('selectBetType', index)"
+        :class="`bet-type ${betType.selectable && 'selectable-bet'}  ${
+          betType.selected && 'selected-bet'
+        }`"
+        @click="selectBet(index)"
       >
         {{ betType.name }}
       </div>
@@ -20,6 +22,27 @@
 export default {
   name: 'BetTypePanel',
   props: { betTypes: { type: Array, default: null } },
+  computed: {
+    possibleBetTypes() {
+      const allBets = this.betTypes.map((betType) => {
+        if (betType.spaces) {
+          betType.selectable = true
+        } else {
+          betType.selectable = false
+        }
+        return betType
+      })
+      return allBets
+    },
+  },
+  methods: {
+    selectBet(index) {
+      const selectedBet = this.possibleBetTypes[index]
+      if (selectedBet.selectable) {
+        this.$emit('selectBetType', index)
+      }
+    },
+  },
 }
 </script>
 
@@ -30,6 +53,15 @@ export default {
   width: 25%;
   border-radius: 0.5em;
   text-align: center;
+  color: green;
+  background-color: lightgray;
+  border-style: dotted;
+  border-color: black;
+  border-width: 1px;
+  font-weight: 400;
+}
+.selectable-bet {
+  border-style: solid;
   font-weight: 600;
   border-color: black;
   border-width: 2px;
