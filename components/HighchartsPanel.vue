@@ -31,7 +31,7 @@ export default {
     chartOptions() {
       const seriesData = this.slices.map((slice) => {
         const numberAsString = this.convertSliceNumber(slice.number)
-        const isSelected = this.selectedSpaces.findIndex((selectedSpace) => selectedSpace === numberAsString) !== -1
+        const isSelected = this.selectedSpaces ? this.selectedSpaces.findIndex((selectedSpace) => selectedSpace === numberAsString) !== -1 : false
         return {
           name: numberAsString,
           y: 1,

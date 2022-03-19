@@ -2,11 +2,11 @@
   <div class="content flex flex-row">
     <betTypes :bet-types="betTypes" @selectBetType="selectBetType" />
     <highcharts :slices="slices" :selected-spaces="selectedSpaces" />
-    
   </div>
 </template>
 <script>
 import { createSlices } from '../static/slices'
+import { createBets } from '../static/bets'
 import HighchartsPanel from './HighchartsPanel'
 import BetTypePanel from './BetTypePanel'
 
@@ -14,18 +14,18 @@ export default {
   name: 'RouletteWheel',
   components: {
     highcharts: HighchartsPanel,
-    betTypes: BetTypePanel
+    betTypes: BetTypePanel,
   },
   data() {
     return { slices: null, betTypes: null }
   },
   computed: {
     selectedBetType() {
-      return this.betTypes.find((betType) => betType.selected === true);
+      return this.betTypes.find((betType) => betType.selected === true)
     },
     selectedSpaces() {
-      return this.selectedBetType.spaces;
-    }
+      return this.selectedBetType ? this.selectedBetType.spaces : [];
+    },
   },
   created() {
     this.initSlices()
@@ -33,17 +33,8 @@ export default {
   },
   methods: {
     initBetTypes() {
-      this.betTypes = [
-        { name: 'Boom 00', selected: true, spaces: ['00'] },
-        { name: 'Green', selected: false, spaces: ['00', '0'] },
-        { name: 'Green++', selected: false },
-        { name: '5 Across', selected: false },
-        { name: '5 Bell Curve', selected: false },
-        { name: '3 Bell Curve', selected: false },
-        { name: '7 Across', selected: false },
-        { name: '7 Slant Curve', selected: false },
-        { name: '7 Bell Curve', selected: false },
-      ]
+      this.betTypes = createBets()
+      this.betTypes.forEach((betType) => (betType.selected = false))
     },
     initSlices() {
       this.slices = createSlices()
@@ -65,7 +56,6 @@ export default {
 .column {
   margin: 1em 4em;
 }
-
 
 .highcharts-figure,
 .highcharts-data-table table {
