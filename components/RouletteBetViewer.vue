@@ -24,7 +24,7 @@ export default {
       return this.betTypes.find((betType) => betType.selected === true)
     },
     selectedSpaces() {
-      return this.selectedBetType ? this.selectedBetType.spaces : [];
+      return this.selectedBetType ? this.selectedBetType.spaces : []
     },
   },
   created() {

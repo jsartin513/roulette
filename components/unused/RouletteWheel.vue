@@ -98,5 +98,4 @@ $colors: (
 .number {
   position: relative;
 }
-
 </style>

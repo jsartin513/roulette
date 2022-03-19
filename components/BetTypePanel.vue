@@ -1,8 +1,6 @@
 <template>
   <div class="column">
-    <h2 class="text-lg text-center border-t-2 border-b-2">
-      Bet types
-    </h2>
+    <h2 class="text-lg text-center border-t-2 border-b-2">Bet types</h2>
     <div class="flex flex-wrap m-2">
       <div
         v-for="(betType, index) in possibleBetTypes"
@@ -14,6 +12,13 @@
       >
         {{ betType.name }}
       </div>
+    </div>
+    <div>
+      <h3 class="text-md text-center border-t border-b m-2">Odds</h3>
+      <div class="odds">Payout: 35:1</div>
+      <div class="odds">Likelihood: 1 in 38</div>
+      <div class="odds">Win requirements: Skip 3 of 37 losses</div>
+      <p class="odds">How does this work? Lorem ipsum and whatnot.</p>
     </div>
   </div>
 </template>
@@ -47,6 +52,10 @@ export default {
 </script>
 
 <style scoped>
+.odds {
+  margin-left: 0.5em;
+}
+
 .bet-type {
   padding: 1em;
   margin: 1em;

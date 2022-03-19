@@ -1,8 +1,6 @@
 <template>
   <div class="column">
-    <h2 class="text-lg text-center border-t-2 border-b-2">
-      Vizualization
-    </h2>
+    <h2 class="text-lg text-center border-t-2 border-b-2">Vizualization</h2>
     <div>
       <highcharts :options="chartOptions" />
     </div>
@@ -25,18 +23,22 @@ export default {
   components: { highcharts: Chart },
   props: {
     slices: { type: Array, default: null },
-    selectedSpaces: { type: Array, default: null } 
+    selectedSpaces: { type: Array, default: null },
   },
   computed: {
     chartOptions() {
       const seriesData = this.slices.map((slice) => {
         const numberAsString = this.convertSliceNumber(slice.number)
-        const isSelected = this.selectedSpaces ? this.selectedSpaces.findIndex((selectedSpace) => selectedSpace === numberAsString) !== -1 : false
+        const isSelected = this.selectedSpaces
+          ? this.selectedSpaces.findIndex(
+              (selectedSpace) => selectedSpace === numberAsString
+            ) !== -1
+          : false
         return {
           name: numberAsString,
           y: 1,
           color: slice.color,
-          selected: isSelected
+          selected: isSelected,
         }
       })
       return {
