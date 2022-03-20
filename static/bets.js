@@ -18,7 +18,27 @@ const betList = [
 
 function createBets() {
   const allBets = [...betList]
-  allBets.forEach((bet) => (bet.selected = false))
+  allBets.forEach((bet) => {
+    bet.selected = false
+    const newSpaces = []
+    if (bet.spaces) {
+      const spaceCount = bet.spaces.length
+      let betAmount
+      if (spaceCount <= 5) {
+        betAmount = 5 / spaceCount
+      } else {
+        betAmount = 1
+      }
+      bet.spaces.forEach((betSpace) => {
+        if (typeof(betSpace) === 'string') {
+          const val = betSpace.toString()
+          const newSpace = { slice: val, betAmount }
+          newSpaces.push(newSpace)
+        }
+      })
+      bet.spaces = [...newSpaces]
+    }
+  })
   return allBets
 }
 
