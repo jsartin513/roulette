@@ -54,15 +54,6 @@ export default {
 </script>
 
 <style scoped>
-.odds {
-  margin-left: 0.5em;
-}
-
-.label {
-  font-weight: 800;
-  padding-right: 0.5em;
-}
-
 .bet-type {
   padding: 1em;
   margin: 1em;

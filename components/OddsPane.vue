@@ -17,7 +17,7 @@
 <script>
 export default {
   name: 'OddsPane',
-  props: { selectedBetType: {type: Object, default: null}},
+  props: { selectedBetType: { type: Object, default: null } },
   computed: {
     dollarsBet() {
       return this.selectedBetType.spaces.length
@@ -39,3 +39,14 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.odds {
+  margin-left: 0.5em;
+}
+
+.label {
+  font-weight: 800;
+  padding-right: 0.5em;
+}
+</style>
