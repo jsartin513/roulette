@@ -30,7 +30,7 @@ function createBets() {
         betAmount = 1
       }
       bet.spaces.forEach((betSpace) => {
-        if (typeof(betSpace) === 'string') {
+        if (typeof betSpace === 'string') {
           const val = betSpace.toString()
           const newSpace = { slice: val, betAmount }
           newSpaces.push(newSpace)
