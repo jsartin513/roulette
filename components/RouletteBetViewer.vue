@@ -64,8 +64,6 @@ export default {
   margin: 1em 4em;
 }
 
-
-
 input[type='number'] {
   min-width: 50px;
 }

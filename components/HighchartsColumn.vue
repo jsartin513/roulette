@@ -29,7 +29,8 @@ export default {
     seriesData() {
       const seriesData = this.slices.map((slice) => {
         const numberAsString = this.convertSliceNumber(slice.number)
-        const anySelected = this.selectedSpaces && this.selectedSpaces.length > 0
+        const anySelected =
+          this.selectedSpaces && this.selectedSpaces.length > 0
         const isSelected = this.selectedSpaces
           ? this.selectedSpaces.findIndex(
               (selectedSpace) => selectedSpace === numberAsString
@@ -67,12 +68,12 @@ export default {
               style: { color: '#FFFFFF' },
               distance: -10,
             },
-            point: {opacity: (this.selectedSpaces && this.selectedSpaces.length > 0) ? 0.2 : 0.2}
+            // point: {opacity: (this.selectedSpaces && this.selectedSpaces.length > 0) ? 0.2 : 0.2}
           },
           series: {
             // opacity: (this.selectedSpaces && this.selectedSpaces.length > 0) ? 0.2 : 1,
             // opacity: (this.selectedSpaces && this.selectedSpaces.length > 0) ? 0.2 : 1,
-            states: { select: {opacity: 1, normal: {opacity: 0.1}}}
+            states: { select: { opacity: 1 }, hover: { opacity: 0.2 } },
           },
         },
         series: [
@@ -95,20 +96,17 @@ export default {
       return number.toString()
     },
     convertColor(color, showOpaqueColor) {
-      if (!showOpaqueColor){
-        return color;
+      if (!showOpaqueColor) {
+        return color
       }
-      if (color==="black"){
-        return 'rgba(0,0,0,0.2)';
+      if (color === 'black') {
+        return 'rgba(0,0,0,0.2)'
+      } else if (color === 'red') {
+        return 'rgba(255,0,0,0.2)'
+      } else {
+        return 'rgba(0,128,0,0.2)'
       }
-      else if (color==="red"){
-        return 'rgba(255,0,0,0.2)';
-      }
-      else {
-        return 'rgba(0,128,0,0.2)';
-      }
-
-    }
+    },
   },
 }
 </script>
@@ -158,6 +156,6 @@ export default {
 }
 
 path.inactive {
-  opacity: .1 !important;
+  opacity: 0.1 !important;
 }
 </style>
