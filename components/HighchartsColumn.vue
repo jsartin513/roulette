@@ -48,6 +48,8 @@ export default {
       return seriesData
     },
     chartOptions() {
+      const calculatedOpacity =
+        this.selectedSpaces && this.selectedSpaces.length > 0 ? 0.2 : 1
       return {
         chart: {
           height: 600,
@@ -68,12 +70,17 @@ export default {
               style: { color: '#FFFFFF' },
               distance: -10,
             },
-            // point: {opacity: (this.selectedSpaces && this.selectedSpaces.length > 0) ? 0.2 : 0.2}
           },
           series: {
-            // opacity: (this.selectedSpaces && this.selectedSpaces.length > 0) ? 0.2 : 1,
-            // opacity: (this.selectedSpaces && this.selectedSpaces.length > 0) ? 0.2 : 1,
-            states: { select: { opacity: 1 }, hover: { opacity: 0.2 } },
+            states: {
+              select: { opacity: 1 },
+              hover: {
+                opacity: calculatedOpacity,
+              },
+              inactive: {
+                opacity: calculatedOpacity,
+              },
+            },
           },
         },
         series: [
