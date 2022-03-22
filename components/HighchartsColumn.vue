@@ -1,11 +1,19 @@
 <template>
   <div class="column">
-    <h2 class="text-lg text-center border-t-2 border-b-2 mb-2">Vizualization</h2>
+    <h2 class="text-lg text-center border-t-2 border-b-2 mb-2">
+      Vizualization
+    </h2>
     <div class="text-med border-b-2 text-right pb-2">
-      <button class="border-2 rounded-lg py-2 px-8" @click="zoomLevel = zoomLevel - 1">
+      <button
+        class="border-2 rounded-lg py-2 px-8"
+        @click="zoomLevel = zoomLevel - 1"
+      >
         Zoom Out
       </button>
-      <button class="border-2 rounded-lg py-2 px-8" @click="zoomLevel = zoomLevel + 1">
+      <button
+        class="border-2 rounded-lg py-2 px-8"
+        @click="zoomLevel = zoomLevel + 1"
+      >
         Zoom In
       </button>
     </div>
