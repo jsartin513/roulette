@@ -4,6 +4,7 @@
       :bet-types="betTypes"
       :selected-bet-type="selectedBetType"
       @selectBetType="selectBetType"
+      @clearBet="selectBetType(-1)"
     />
     <highcharts :slices="slices" :selected-spaces="selectedSpaces" />
   </div>
