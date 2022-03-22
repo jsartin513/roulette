@@ -1,6 +1,12 @@
 <template>
   <div class="column">
-    <h2 class="text-lg text-center border-t-2 border-b-2">Bet types</h2>
+    <h2 class="text-lg text-center border-t-2 border-b-2 my-2">Bet types</h2>
+    <div class="text-med border-b-2 text-right pb-2">
+      <button class="border-2 rounded-lg py-2 px-8" @click="$emit('clearBet')">
+        Clear
+      </button>
+    </div>
+
     <div class="flex flex-wrap m-2">
       <div
         v-for="(betType, index) in possibleBetTypes"

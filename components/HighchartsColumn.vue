@@ -1,6 +1,23 @@
 <template>
   <div class="column">
-    <h2 class="text-lg text-center border-t-2 border-b-2">Vizualization</h2>
+    <h2 class="text-lg text-center border-t-2 border-b-2 mb-2">
+      Vizualization
+    </h2>
+    <div class="text-med border-b-2 text-right pb-2">
+      <button
+        class="border-2 rounded-lg py-2 px-8"
+        @click="zoomLevel = zoomLevel - 1"
+      >
+        Zoom Out
+      </button>
+      <button
+        class="border-2 rounded-lg py-2 px-8"
+        @click="zoomLevel = zoomLevel + 1"
+      >
+        Zoom In
+      </button>
+    </div>
+
     <div>
       <highcharts :options="chartOptions" />
     </div>
@@ -25,9 +42,35 @@ export default {
     slices: { type: Array, default: null },
     selectedSpaces: { type: Array, default: null },
   },
+  data() {
+    return { zoomLevel: 0 }
+  },
   computed: {
+    zoomedSlices() {
+      const zoomed = []
+      let include = true
+      let count = 0
+
+      this.slices.forEach((slice) => {
+        if (this.zoomLevel > 0) {
+          if (slice.number === 35 || slice.number === 36) {
+            include = false
+            count = 0
+          }
+          count += 1
+          if (slice.number === 25 || slice.number === 26) {
+            zoomed.push({ color: 'white', count, number: 999 })
+            include = true
+          }
+        }
+        if (include) {
+          zoomed.push(slice)
+        }
+      })
+      return zoomed
+    },
     seriesData() {
-      const seriesData = this.slices.map((slice) => {
+      const seriesData = this.zoomedSlices.map((slice) => {
         const numberAsString = this.convertSliceNumber(slice.number)
         const anySelected =
           this.selectedSpaces && this.selectedSpaces.length > 0
@@ -38,6 +81,14 @@ export default {
           : false
         const showOpaqueColor = anySelected && !isSelected
         const convertedColor = this.convertColor(slice.color, showOpaqueColor)
+        if (slice.count) {
+          return {
+            name: `${slice.count} spots hidden`,
+            y: 1,
+            color: 'white',
+            selected: isSelected,
+          }
+        }
         return {
           name: numberAsString,
           y: 1,
@@ -48,6 +99,8 @@ export default {
       return seriesData
     },
     chartOptions() {
+      const calculatedOpacity =
+        this.selectedSpaces && this.selectedSpaces.length > 0 ? 0.2 : 1
       return {
         chart: {
           height: 600,
@@ -68,12 +121,17 @@ export default {
               style: { color: '#FFFFFF' },
               distance: -10,
             },
-            // point: {opacity: (this.selectedSpaces && this.selectedSpaces.length > 0) ? 0.2 : 0.2}
           },
           series: {
-            // opacity: (this.selectedSpaces && this.selectedSpaces.length > 0) ? 0.2 : 1,
-            // opacity: (this.selectedSpaces && this.selectedSpaces.length > 0) ? 0.2 : 1,
-            states: { select: { opacity: 1 }, hover: { opacity: 0.2 } },
+            states: {
+              select: { opacity: 1 },
+              hover: {
+                opacity: calculatedOpacity,
+              },
+              inactive: {
+                opacity: calculatedOpacity,
+              },
+            },
           },
         },
         series: [
@@ -92,6 +150,8 @@ export default {
     convertSliceNumber(number) {
       if (number === 100) {
         return '00'
+      } else if (number === 999) {
+        return 'inner slots'
       }
       return number.toString()
     },
