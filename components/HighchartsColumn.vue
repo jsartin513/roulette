@@ -53,15 +53,14 @@ export default {
 
       this.slices.forEach((slice) => {
         if (this.zoomLevel > 0) {
+          // TODO: Calculate these
           const stopNumber = this.zoomLevel === 2 ? 24 : 34
-          // 24 would be 34
           if (slice.number === 35 || slice.number === stopNumber) {
             include = false
             count = 0
           }
           count += 1
           const startNumber = this.zoomLevel === 2 ? 25 : 8
-          // 25 would be 8
           if (slice.number === startNumber || slice.number === 9) {
             zoomed.push({ color: 'white', count, number: 999 })
             include = true
@@ -86,6 +85,7 @@ export default {
         const showOpaqueColor = anySelected && !isSelected
         const convertedColor = this.convertColor(slice.color, showOpaqueColor)
         if (slice.count) {
+          // TODO: Calculate this
           const yNumber = this.zoomLevel === 1 ? 3 : 1
           return {
             name: `${slice.count} spots hidden`,
