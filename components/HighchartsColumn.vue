@@ -6,12 +6,14 @@
     <div class="text-med border-b-2 text-right pb-2">
       <button
         class="border-2 rounded-lg py-2 px-8"
+        :disabled="disableZoomDown"
         @click="zoomLevel = zoomLevel - 1"
       >
         Zoom Out
       </button>
       <button
         class="border-2 rounded-lg py-2 px-8"
+        :disabled="disableZoomUp"
         @click="zoomLevel = zoomLevel + 1"
       >
         Zoom In
@@ -46,6 +48,12 @@ export default {
     return { zoomLevel: 0 }
   },
   computed: {
+    disableZoomDown() {
+      return this.zoomLevel <= 0
+    },
+    disableZoomUp() {
+      return this.zoomLevel >= 2
+    },
     zoomedSlices() {
       const zoomed = []
       let include = true
@@ -53,12 +61,15 @@ export default {
 
       this.slices.forEach((slice) => {
         if (this.zoomLevel > 0) {
-          if (slice.number === 35 || slice.number === 36) {
+          // TODO: Calculate these
+          const stopNumber = this.zoomLevel === 2 ? 24 : 34
+          if (slice.number === 35 || slice.number === stopNumber) {
             include = false
             count = 0
           }
           count += 1
-          if (slice.number === 25 || slice.number === 26) {
+          const startNumber = this.zoomLevel === 2 ? 25 : 8
+          if (slice.number === startNumber || slice.number === 9) {
             zoomed.push({ color: 'white', count, number: 999 })
             include = true
           }
@@ -82,9 +93,11 @@ export default {
         const showOpaqueColor = anySelected && !isSelected
         const convertedColor = this.convertColor(slice.color, showOpaqueColor)
         if (slice.count) {
+          // TODO: Calculate this
+          const yNumber = this.zoomLevel === 1 ? 3 : 1
           return {
             name: `${slice.count} spots hidden`,
-            y: 1,
+            y: yNumber,
             color: 'white',
             selected: isSelected,
           }
