@@ -57,20 +57,20 @@ export default {
     zoomedSlices() {
       const zoomed = []
       let include = true
-      let count = 0
+      let skippedSlicesCount = 0
 
       this.slices.forEach((slice) => {
         if (this.zoomLevel > 0) {
           // TODO: Calculate these
-          const stopNumber = this.zoomLevel === 2 ? 24 : 34
-          if (slice.number === 35 || slice.number === stopNumber) {
+          const stopNumber = this.zoomLevel === 2 ? 25 : 8
+          if (slice.number === 26 || slice.number === stopNumber) {
             include = false
-            count = 0
+            skippedSlicesCount = 0
           }
-          count += 1
-          const startNumber = this.zoomLevel === 2 ? 25 : 8
-          if (slice.number === startNumber || slice.number === 9) {
-            zoomed.push({ color: 'white', count, number: 999 })
+          skippedSlicesCount += 1
+          const startNumber = this.zoomLevel === 2 ? 36 : 15
+          if (slice.number === startNumber || slice.number === 14) {
+            zoomed.push({ color: 'white', skippedSlicesCount, number: 999 })
             include = true
           }
         }
@@ -92,11 +92,11 @@ export default {
           : false
         const showOpaqueColor = anySelected && !isSelected
         const convertedColor = this.convertColor(slice.color, showOpaqueColor)
-        if (slice.count) {
+        if (slice.skippedSlicesCount) {
           // TODO: Calculate this
           const yNumber = this.zoomLevel === 1 ? 3 : 1
           return {
-            name: `${slice.count} spots hidden`,
+            name: `${slice.skippedSlicesCount} spots hidden`,
             y: yNumber,
             color: 'white',
             selected: isSelected,
