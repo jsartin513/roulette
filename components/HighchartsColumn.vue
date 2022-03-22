@@ -24,10 +24,33 @@ export default {
   props: {
     slices: { type: Array, default: null },
     selectedSpaces: { type: Array, default: null },
+    zoomLevel: { type: Number, default: 0 }
   },
   computed: {
+    zoomedSlices() {
+      const zoomed = []
+      let include = true;
+      let count = 0;
+
+      this.slices.forEach((slice) => {
+        if (this.zoomLevel > 0) {
+          if (slice.number === 35 || slice.number === 36){
+            include = false;
+            count = 0;
+          }
+          count += 1;
+          if (slice.number === 25 || slice.number === 26){
+            zoomed.push({color: 'white', count, number: 999})
+            include = true;
+          }
+        }
+        if (include)
+          {zoomed.push(slice);}
+      })
+      return zoomed
+    },
     seriesData() {
-      const seriesData = this.slices.map((slice) => {
+      const seriesData = this.zoomedSlices.map((slice) => {
         const numberAsString = this.convertSliceNumber(slice.number)
         const anySelected =
           this.selectedSpaces && this.selectedSpaces.length > 0
@@ -38,6 +61,14 @@ export default {
           : false
         const showOpaqueColor = anySelected && !isSelected
         const convertedColor = this.convertColor(slice.color, showOpaqueColor)
+        if (slice.count)  {
+          return {
+            name: `${slice.count} spots hidden`,
+            y: 1,
+            color: 'white',
+            selected: isSelected,
+          }
+        }
         return {
           name: numberAsString,
           y: 1,
@@ -99,6 +130,9 @@ export default {
     convertSliceNumber(number) {
       if (number === 100) {
         return '00'
+      }
+      else if (number === 999) {
+        return 'inner slots'
       }
       return number.toString()
     },
