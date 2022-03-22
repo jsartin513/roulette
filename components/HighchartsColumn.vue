@@ -6,12 +6,14 @@
     <div class="text-med border-b-2 text-right pb-2">
       <button
         class="border-2 rounded-lg py-2 px-8"
+        :disabled="disableZoomDown"
         @click="zoomLevel = zoomLevel - 1"
       >
         Zoom Out
       </button>
       <button
         class="border-2 rounded-lg py-2 px-8"
+        :disabled="disableZoomUp"
         @click="zoomLevel = zoomLevel + 1"
       >
         Zoom In
@@ -46,6 +48,12 @@ export default {
     return { zoomLevel: 0 }
   },
   computed: {
+    disableZoomDown() {
+      return this.zoomLevel <= 0
+    },
+    disableZoomUp() {
+      return this.zoomLevel >= 2
+    },
     zoomedSlices() {
       const zoomed = []
       let include = true
