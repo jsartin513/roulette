@@ -53,12 +53,12 @@ export default {
 
       this.slices.forEach((slice) => {
         if (this.zoomLevel > 0) {
-          if (slice.number === 35 || slice.number === 36) {
+          if (slice.number === 35 || slice.number === 24) {
             include = false
             count = 0
           }
           count += 1
-          if (slice.number === 25 || slice.number === 26) {
+          if (slice.number === 25 || slice.number === 9) {
             zoomed.push({ color: 'white', count, number: 999 })
             include = true
           }
