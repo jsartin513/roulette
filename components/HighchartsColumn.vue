@@ -1,6 +1,15 @@
 <template>
   <div class="column">
-    <h2 class="text-lg text-center border-t-2 border-b-2">Vizualization</h2>
+    <h2 class="text-lg text-center border-t-2 border-b-2 mb-2">Vizualization</h2>
+    <div class="text-med border-b-2 text-right pb-2">
+      <button class="border-2 rounded-lg py-2 px-8" @click="zoomLevel = zoomLevel - 1">
+        Zoom Out
+      </button>
+      <button class="border-2 rounded-lg py-2 px-8" @click="zoomLevel = zoomLevel + 1">
+        Zoom In
+      </button>
+    </div>
+
     <div>
       <highcharts :options="chartOptions" />
     </div>
@@ -24,28 +33,31 @@ export default {
   props: {
     slices: { type: Array, default: null },
     selectedSpaces: { type: Array, default: null },
-    zoomLevel: { type: Number, default: 0 }
+  },
+  data() {
+    return { zoomLevel: 0 }
   },
   computed: {
     zoomedSlices() {
       const zoomed = []
-      let include = true;
-      let count = 0;
+      let include = true
+      let count = 0
 
       this.slices.forEach((slice) => {
         if (this.zoomLevel > 0) {
-          if (slice.number === 35 || slice.number === 36){
-            include = false;
-            count = 0;
+          if (slice.number === 35 || slice.number === 36) {
+            include = false
+            count = 0
           }
-          count += 1;
-          if (slice.number === 25 || slice.number === 26){
-            zoomed.push({color: 'white', count, number: 999})
-            include = true;
+          count += 1
+          if (slice.number === 25 || slice.number === 26) {
+            zoomed.push({ color: 'white', count, number: 999 })
+            include = true
           }
         }
-        if (include)
-          {zoomed.push(slice);}
+        if (include) {
+          zoomed.push(slice)
+        }
       })
       return zoomed
     },
@@ -61,7 +73,7 @@ export default {
           : false
         const showOpaqueColor = anySelected && !isSelected
         const convertedColor = this.convertColor(slice.color, showOpaqueColor)
-        if (slice.count)  {
+        if (slice.count) {
           return {
             name: `${slice.count} spots hidden`,
             y: 1,
@@ -130,8 +142,7 @@ export default {
     convertSliceNumber(number) {
       if (number === 100) {
         return '00'
-      }
-      else if (number === 999) {
+      } else if (number === 999) {
         return 'inner slots'
       }
       return number.toString()
