@@ -23,7 +23,10 @@
         {{ betType.name }}
       </div>
     </div>
-    <betDescriptorPane v-if="canShowDescription" :bet-description="selectedBetType.description" />
+    <betDescriptorPane
+      v-if="canShowDescription"
+      :bet-description="selectedBetType.description"
+    />
     <oddsPane v-if="canComputePayout" :selected-bet-type="selectedBetType" />
   </div>
 </template>
@@ -58,8 +61,8 @@ export default {
       return this.selectedBetType && this.selectedBetType.spaces.length > 0
     },
     canShowDescription() {
-      return this.selectedBetType && this.selectedBetType.description;
-    }
+      return this.selectedBetType && this.selectedBetType.description
+    },
   },
   methods: {
     selectBet(index) {

@@ -15,12 +15,12 @@ export default {
   props: { betDescription: { type: Object, default: null } },
   computed: {
     currenntDescription() {
-      return this.betDescription.primary || '';
+      return this.betDescription.primary || ''
     },
     currentSpecifics() {
-      return this.betDescription.secondary || '';
-    }
-  }
+      return this.betDescription.secondary || ''
+    },
+  },
 }
 </script>
 <style scoped>
