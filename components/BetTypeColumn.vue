@@ -1,7 +1,7 @@
 <template>
   <div class="column">
     <h2 class="text-lg text-center border-t-2 border-b-2 my-2">Bet types</h2>
-    <div class="text-med border-b-2 text-right pb-2">
+    <div class="text-med border-b-2 text-right pb-2 my-2">
       <button
         class="border-2 rounded-lg py-2 px-8"
         :disabled="disableClearBet"
@@ -11,7 +11,7 @@
       </button>
     </div>
 
-    <div class="flex flex-wrap m-2">
+    <div class="flex flex-wrap gap-4">
       <div
         v-for="(betType, index) in possibleBetTypes"
         :key="index"
@@ -23,15 +23,21 @@
         {{ betType.name }}
       </div>
     </div>
+    <betDescriptorPane
+      v-if="canShowDescription"
+      :bet-description="selectedBetType.description"
+    />
     <oddsPane v-if="canComputePayout" :selected-bet-type="selectedBetType" />
   </div>
 </template>
 
 <script>
 import OddsPane from './OddsPane'
+import BetDescriptorPane from './BetDescriptorPane'
+
 export default {
   name: 'BetTypePanel',
-  components: { oddsPane: OddsPane },
+  components: { oddsPane: OddsPane, betDescriptorPane: BetDescriptorPane },
   props: {
     betTypes: { type: Array, default: null },
     selectedBetType: { type: Object, default: null },
@@ -54,6 +60,9 @@ export default {
     canComputePayout() {
       return this.selectedBetType && this.selectedBetType.spaces.length > 0
     },
+    canShowDescription() {
+      return this.selectedBetType && this.selectedBetType.description
+    },
   },
   methods: {
     selectBet(index) {
@@ -69,7 +78,6 @@ export default {
 <style scoped>
 .bet-type {
   padding: 1em;
-  margin: 1em;
   width: 25%;
   border-radius: 0.5em;
   text-align: center;
@@ -79,6 +87,7 @@ export default {
   border-color: black;
   border-width: 1px;
   font-weight: 400;
+  overflow: clip;
 }
 .selectable-bet {
   border-style: solid;

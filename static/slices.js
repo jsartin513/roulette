@@ -1,44 +1,22 @@
 function createSlices() {
   const slices = []
-  slices.push({ color: 'green', number: 100 })
-  slices.push({ color: 'red', number: 1 })
-  slices.push({ color: 'black', number: 13 })
-  slices.push({ color: 'red', number: 36 })
-  slices.push({ color: 'black', number: 24 })
-  slices.push({ color: 'red', number: 3 })
-  slices.push({ color: 'black', number: 15 })
-  slices.push({ color: 'red', number: 34 })
-  slices.push({ color: 'black', number: 22 })
-  slices.push({ color: 'red', number: 5 })
-  slices.push({ color: 'black', number: 17 })
-  slices.push({ color: 'red', number: 32 })
-  slices.push({ color: 'black', number: 20 })
-  slices.push({ color: 'red', number: 7 })
-  slices.push({ color: 'black', number: 11 })
-  slices.push({ color: 'red', number: 30 })
-  slices.push({ color: 'black', number: 26 })
-  slices.push({ color: 'red', number: 9 })
-  slices.push({ color: 'black', number: 28 })
-  slices.push({ color: 'green', number: 0 })
-  slices.push({ color: 'black', number: 2 })
-  slices.push({ color: 'red', number: 14 })
-  slices.push({ color: 'black', number: 35 })
-  slices.push({ color: 'red', number: 23 })
-  slices.push({ color: 'black', number: 4 })
-  slices.push({ color: 'red', number: 16 })
-  slices.push({ color: 'black', number: 33 })
-  slices.push({ color: 'red', number: 21 })
-  slices.push({ color: 'black', number: 6 })
-  slices.push({ color: 'red', number: 18 })
-  slices.push({ color: 'black', number: 31 })
-  slices.push({ color: 'red', number: 19 })
-  slices.push({ color: 'black', number: 8 })
-  slices.push({ color: 'red', number: 12 })
-  slices.push({ color: 'black', number: 29 })
-  slices.push({ color: 'red', number: 25 })
-  slices.push({ color: 'black', number: 10 })
-  slices.push({ color: 'red', number: 27 })
+  const numbers = [
+    100, 27, 10, 25, 29, 12, 8, 19, 31, 18, 6, 21, 33, 16, 4, 23, 14, 35, 2, 0,
+    28, 9, 26, 30, 11, 7, 20, 32, 17, 5, 22, 34, 15, 3, 24, 36, 13, 1,
+  ]
 
+  let color
+  // Starts as 'true' so that the next number after green is red
+  let isBlack = true
+  numbers.forEach((number) => {
+    if (number === 100 || number === 0) {
+      color = 'green'
+    } else {
+      color = isBlack ? 'black' : 'red'
+    }
+    slices.push({ number, color })
+    isBlack = !isBlack
+  })
   return slices
 }
 
