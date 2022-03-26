@@ -10,7 +10,6 @@
     <div class="odds">
       <span class="label">Win requirements: </span>{{ currentWinRequiremennts }}
     </div>
-    <p class="odds">How does this work? Lorem ipsum and whatnot.</p>
   </div>
 </template>
 

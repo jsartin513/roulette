@@ -1,5 +1,5 @@
 const betList = [
-  { name: 'Boom 00', spaces: ['00'] },
+  { name: 'Boom 00', spaces: ['00'], description: {primary: 'Bet only on 00', secondary: 'Put at least the minimum bet on one spot - usually 00' } },
   { name: 'Green', spaces: ['00', '0'] },
   {
     name: 'Green++',

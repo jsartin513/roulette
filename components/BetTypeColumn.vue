@@ -23,15 +23,18 @@
         {{ betType.name }}
       </div>
     </div>
+    <betDescriptorPane v-if="canShowDescription" :bet-description="selectedBetType.description" />
     <oddsPane v-if="canComputePayout" :selected-bet-type="selectedBetType" />
   </div>
 </template>
 
 <script>
 import OddsPane from './OddsPane'
+import BetDescriptorPane from './BetDescriptorPane'
+
 export default {
   name: 'BetTypePanel',
-  components: { oddsPane: OddsPane },
+  components: { oddsPane: OddsPane, betDescriptorPane: BetDescriptorPane },
   props: {
     betTypes: { type: Array, default: null },
     selectedBetType: { type: Object, default: null },
@@ -54,6 +57,9 @@ export default {
     canComputePayout() {
       return this.selectedBetType && this.selectedBetType.spaces.length > 0
     },
+    canShowDescription() {
+      return this.selectedBetType && this.selectedBetType.description;
+    }
   },
   methods: {
     selectBet(index) {
