@@ -6,7 +6,12 @@
       @selectBetType="selectBetType"
       @clearBet="selectBetType(-1)"
     />
-    <highcharts :slices="slices" :selected-spaces="selectedSpaces" />
+    <highcharts
+      :slices="slices"
+      :selected-spaces="selectedSpaces"
+      :wheel-offset="wheelOffset"
+      @rotate="rotateWheel()"
+    />
   </div>
 </template>
 <script>
@@ -22,14 +27,27 @@ export default {
     betTypes: BetTypeColumn,
   },
   data() {
-    return { slices: null, betTypes: null }
+    return { slices: null, betTypes: null, wheelOffset: 0 }
   },
   computed: {
     selectedBetType() {
       return this.betTypes.find((betType) => betType.selected === true)
     },
     selectedSpaces() {
-      const spaces = this.selectedBetType ? this.selectedBetType.spaces : []
+      let spaces = []
+      if (this.selectedBetType) {
+        if (this.selectedBetType.type === 'specific') {
+          spaces = this.selectedBetType.spaces
+        } else if (this.selectedBetType.type === 'straight') {
+          const nunmber = parseInt(this.selectedBetType.name[0])
+          return this.slices.slice(0, nunmber).map((space) => {
+            if (space.number === 100) {
+              return '00'
+            }
+            return space.number.toString()
+          })
+        }
+      }
       return spaces.map((space) => {
         return space.slice
       })
@@ -51,10 +69,18 @@ export default {
       this.betTypes.forEach((betType, idx) => {
         if (index === idx) {
           betType.selected = true
+          if (betType.type === 'specific') {
+            this.slices = createSlices()
+          }
         } else {
           betType.selected = false
         }
       })
+    },
+    rotateWheel() {
+      const tempslice = this.slices.shift()
+      this.slices.push(tempslice)
+      this.wheelOffset++
     },
   },
 }

@@ -3,7 +3,11 @@
     <h2 class="text-lg text-center border-b-2 mt-2 mb-4">Vizualization</h2>
     <div class="flex text-med border-b-2 border-dashed pb-2">
       <div class="button-group text-left w-6/12">
-        <button class="border-2 rounded-lg py-2 px-8" :disabled="true">
+        <button
+          class="border-2 rounded-lg py-2 px-8"
+          :disabled="!enableRotate"
+          @click="$emit('rotate')"
+        >
           Rotate
         </button>
       </div>
@@ -48,11 +52,24 @@ export default {
   props: {
     slices: { type: Array, default: null },
     selectedSpaces: { type: Array, default: null },
+    wheelOffset: { type: Number, default: 0 },
   },
+  emits: ['rotate'],
   data() {
     return { zoomLevel: 0 }
   },
   computed: {
+    enableRotate() {
+      const anySelected = this.selectedSpaces && this.selectedSpaces.length > 0
+
+      if (anySelected) {
+        // TODO: cleaner way of ruling out green focused
+        return (
+          this.selectedSpaces.length > 2 || this.selectedSpaces.length === 6
+        )
+      }
+      return true
+    },
     disableZoomDown() {
       return this.zoomLevel <= 0
     },
@@ -99,6 +116,7 @@ export default {
         const convertedColor = this.convertColor(slice.color, showOpaqueColor)
         if (slice.skippedSlicesCount) {
           // TODO: Calculate this
+          // TODO: consider separate computed property for "not real slices"
           const yNumber = this.zoomLevel === 1 ? 3 : 1
           return {
             name: `${slice.skippedSlicesCount} spots hidden`,
@@ -119,6 +137,7 @@ export default {
     chartOptions() {
       const calculatedOpacity =
         this.selectedSpaces && this.selectedSpaces.length > 0 ? 0.2 : 1
+      // todo: fix height and width
       return {
         chart: {
           height: 600,
