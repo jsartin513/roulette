@@ -36,15 +36,10 @@ export default {
     selectedSpaces() {
       let spaces = []
       if (this.selectedBetType) {
-        console.log(this.selectedBetType.type)
         if (this.selectedBetType.type === 'specific') {
           spaces = this.selectedBetType.spaces
         } else if (this.selectedBetType.type === 'straight') {
           const nunmber = parseInt(this.selectedBetType.name[0])
-          console.log(nunmber)
-          console.log(this.slices.slice(0, nunmber).map((space) => {
-            return space.number
-          }))
           return this.slices.slice(0, nunmber).map((space) => {
             return space.number.toString()
           })

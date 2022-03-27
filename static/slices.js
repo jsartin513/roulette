@@ -1,4 +1,4 @@
-function createSlices(offset=0) {
+function createSlices(offset = 0) {
   const slices = []
   const numbers = [
     100, 27, 10, 25, 29, 12, 8, 19, 31, 18, 6, 21, 33, 16, 4, 23, 14, 35, 2, 0,
@@ -18,11 +18,11 @@ function createSlices(offset=0) {
     isBlack = !isBlack
   })
 
-  let tempslice;
-  while (offset < 0){
+  let tempslice
+  while (offset < 0) {
     tempslice = slices.shift()
     slices.push(tempslice)
-    offset = offset -1
+    offset = offset - 1
   }
   return slices
 }
