@@ -53,6 +53,16 @@ export default {
     return { zoomLevel: 0 }
   },
   computed: {
+    enableRotate() {
+      const anySelected =
+          this.selectedSpaces && this.selectedSpaces.length > 0
+          
+      if (anySelected){
+        // TODO: cleaner way of ruling out green focused
+        return this.selectedSpaces.length > 2 || this.selectedSpaces.length === 6;
+      }
+      return true;
+    },
     disableZoomDown() {
       return this.zoomLevel <= 0
     },
@@ -99,6 +109,7 @@ export default {
         const convertedColor = this.convertColor(slice.color, showOpaqueColor)
         if (slice.skippedSlicesCount) {
           // TODO: Calculate this
+          // TODO: consider separate computed property for "not real slices"
           const yNumber = this.zoomLevel === 1 ? 3 : 1
           return {
             name: `${slice.skippedSlicesCount} spots hidden`,
@@ -119,6 +130,7 @@ export default {
     chartOptions() {
       const calculatedOpacity =
         this.selectedSpaces && this.selectedSpaces.length > 0 ? 0.2 : 1
+      // todo: fix height and width
       return {
         chart: {
           height: 600,
