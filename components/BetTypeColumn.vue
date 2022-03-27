@@ -104,7 +104,7 @@ export default {
 
 <style scoped>
 .bet-type {
-  padding: 1em;
+  padding: 0.5em;
   width: 25%;
   border-radius: 0.5em;
   text-align: center;
