@@ -13,3 +13,13 @@ export default {
   components: { RouletteBetViewer },
 }
 </script>
+
+<style>
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}
+</style>
