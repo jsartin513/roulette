@@ -66,6 +66,9 @@ export default {
       this.betTypes.forEach((betType, idx) => {
         if (index === idx) {
           betType.selected = true
+          if (betType.type === 'specific'){
+            this.slices = createSlices()
+          }
         } else {
           betType.selected = false
         }
