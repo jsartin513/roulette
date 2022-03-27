@@ -28,16 +28,25 @@
       :bet-description="selectedBetType.description"
     />
     <oddsPane v-if="canComputePayout" :selected-bet-type="selectedBetType" />
+    <noSelectedBetPane v-if="selectedBetType === null" />
+    <betLackingInfoPane v-for="missingType in missingTypes" :key="missingType" :infoMissing="missingType" :betName="selectedBetType.name" />
   </div>
 </template>
 
 <script>
 import OddsPane from './OddsPane'
 import BetDescriptorPane from './BetDescriptorPane'
+import NoSelectedBetPane from './NoSelectedBetPane'
+import BetLackingInfoPane from './BetLackingInfoPane'
 
 export default {
   name: 'BetTypePanel',
-  components: { oddsPane: OddsPane, betDescriptorPane: BetDescriptorPane },
+  components: {
+    oddsPane: OddsPane,
+    betDescriptorPane: BetDescriptorPane,
+    noSelectedBetPane: NoSelectedBetPane,
+    betLackingInfoPane: BetLackingInfoPane
+  },
   props: {
     betTypes: { type: Array, default: null },
     selectedBetType: { type: Object, default: null },
@@ -62,6 +71,19 @@ export default {
     },
     canShowDescription() {
       return this.selectedBetType && this.selectedBetType.description
+    },
+    missingTypes() {
+      if (this.selectedBetType == null){
+        return []
+      }
+      const missingTypes = []
+      if (!this.canComputePayout) {
+        missingTypes.push('Odds and Payout')
+      }
+      if (!this.canShowDescription) {
+        missingTypes.push('Description')
+      }
+      return missingTypes;
     },
   },
   methods: {
