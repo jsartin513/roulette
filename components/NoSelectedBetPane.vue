@@ -7,6 +7,6 @@
 
 <script>
 export default {
-  name: 'NoSelectedBetPane'
+  name: 'NoSelectedBetPane',
 }
 </script>

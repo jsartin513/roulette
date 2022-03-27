@@ -1,14 +1,9 @@
 <template>
   <div class="column">
-    <h2 class="text-lg text-center border-b-2 mt-2 mb-4">
-      Vizualization
-    </h2>
+    <h2 class="text-lg text-center border-b-2 mt-2 mb-4">Vizualization</h2>
     <div class="flex text-med border-b-2 border-dashed pb-2">
       <div class="button-group text-left w-6/12">
-        <button
-          class="border-2 rounded-lg py-2 px-8"
-          :disabled="true"
-        >
+        <button class="border-2 rounded-lg py-2 px-8" :disabled="true">
           Rotate
         </button>
       </div>
