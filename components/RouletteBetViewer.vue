@@ -41,6 +41,9 @@ export default {
         } else if (this.selectedBetType.type === 'straight') {
           const nunmber = parseInt(this.selectedBetType.name[0])
           return this.slices.slice(0, nunmber).map((space) => {
+            if (space.number === 100) {
+              return '00'
+            }
             return space.number.toString()
           })
         }
@@ -66,7 +69,7 @@ export default {
       this.betTypes.forEach((betType, idx) => {
         if (index === idx) {
           betType.selected = true
-          if (betType.type === 'specific'){
+          if (betType.type === 'specific') {
             this.slices = createSlices()
           }
         } else {
