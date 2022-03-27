@@ -6,7 +6,7 @@
       @selectBetType="selectBetType"
       @clearBet="selectBetType(-1)"
     />
-    <highcharts :slices="slices" :selected-spaces="selectedSpaces" />
+    <highcharts :slices="slices" :selected-spaces="selectedSpaces" :wheel-offset="wheelOffset" @rotate="rotateWheel()" />
   </div>
 </template>
 <script>
@@ -22,7 +22,7 @@ export default {
     betTypes: BetTypeColumn,
   },
   data() {
-    return { slices: null, betTypes: null }
+    return { slices: null, betTypes: null, wheelOffset: 0 }
   },
   computed: {
     selectedBetType() {
@@ -56,6 +56,11 @@ export default {
         }
       })
     },
+    rotateWheel() {
+      const tempslice = this.slices.shift()
+      this.slices.push(tempslice)
+      this.wheelOffset++;
+    }
   },
 }
 </script>
