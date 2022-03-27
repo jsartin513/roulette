@@ -1,23 +1,28 @@
 <template>
   <div class="column">
-    <h2 class="text-lg text-center border-t-2 border-b-2 mb-2">
-      Vizualization
-    </h2>
-    <div class="text-med border-b-2 text-right pb-2">
-      <button
-        class="border-2 rounded-lg py-2 px-8"
-        :disabled="disableZoomDown"
-        @click="zoomLevel = zoomLevel - 1"
-      >
-        Zoom Out
-      </button>
-      <button
-        class="border-2 rounded-lg py-2 px-8"
-        :disabled="disableZoomUp"
-        @click="zoomLevel = zoomLevel + 1"
-      >
-        Zoom In
-      </button>
+    <h2 class="text-lg text-center border-b-2 mt-2 mb-4">Vizualization</h2>
+    <div class="flex text-med border-b-2 border-dashed pb-2">
+      <div class="button-group text-left w-6/12">
+        <button class="border-2 rounded-lg py-2 px-8" :disabled="true">
+          Rotate
+        </button>
+      </div>
+      <div class="button-group text-right w-6/12">
+        <button
+          class="border-2 rounded-lg py-2 px-8"
+          :disabled="disableZoomDown"
+          @click="zoomLevel = zoomLevel - 1"
+        >
+          Zoom Out
+        </button>
+        <button
+          class="border-2 rounded-lg py-2 px-8"
+          :disabled="disableZoomUp"
+          @click="zoomLevel = zoomLevel + 1"
+        >
+          Zoom In
+        </button>
+      </div>
     </div>
 
     <div>
