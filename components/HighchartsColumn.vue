@@ -1,5 +1,5 @@
 <template>
-  <div class="column">
+  <div class="column flex-1">
     <h2 class="text-lg text-center border-b-2 mt-2 mb-4">Vizualization</h2>
     <div class="flex text-med border-b-2 border-dashed pb-2">
       <div class="button-group text-left w-6/12">
@@ -56,7 +56,7 @@ export default {
   },
   emits: ['rotate'],
   data() {
-    return { zoomLevel: 0 }
+    return { zoomLevel: 0, chartSize: 600 }
   },
   computed: {
     enableRotate() {
@@ -140,8 +140,6 @@ export default {
       // todo: fix height and width
       return {
         chart: {
-          height: 600,
-          width: 600,
           type: 'pie',
           plotBackgroundColor: null,
           plotBorderWidth: null,
