@@ -6,9 +6,16 @@
         <button
           class="border-2 rounded-lg py-2 px-8"
           :disabled="!enableRotate"
-          @click="$emit('rotate')"
+          @click="$emit('rotate', false)"
         >
-          Rotate
+          {{ `<= Rotate` }}
+        </button>
+        <button
+          class="border-2 rounded-lg py-2 px-8"
+          :disabled="!enableRotate"
+          @click="$emit('rotate', true)"
+        >
+          {{ `=> Rotate` }}
         </button>
       </div>
       <div class="button-group text-right w-6/12">
