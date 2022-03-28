@@ -72,7 +72,7 @@ export default {
       return allBets
     },
     canComputePayout() {
-      return this.selectedBetType && this.selectedBetType.spaces.length > 0
+      return this.selectedBetType && this.selectedBetType.type
     },
     canShowDescription() {
       return this.selectedBetType && this.selectedBetType.description
