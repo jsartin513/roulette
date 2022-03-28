@@ -1,5 +1,5 @@
 <template>
-  <div class="column">
+  <div class="column flex-1">
     <h2 class="text-lg text-center border-b-2 mt-2 mb-4">Bet types</h2>
     <div class="text-med border-b-2 border-dashed text-right pb-2 my-2">
       <button
@@ -72,7 +72,7 @@ export default {
       return allBets
     },
     canComputePayout() {
-      return this.selectedBetType && this.selectedBetType.spaces.length > 0
+      return this.selectedBetType && this.selectedBetType.type
     },
     canShowDescription() {
       return this.selectedBetType && this.selectedBetType.description
@@ -104,7 +104,7 @@ export default {
 
 <style scoped>
 .bet-type {
-  padding: 1em;
+  padding: 0.5em;
   width: 25%;
   border-radius: 0.5em;
   text-align: center;

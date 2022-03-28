@@ -10,7 +10,7 @@
       :slices="slices"
       :selected-spaces="selectedSpaces"
       :wheel-offset="wheelOffset"
-      @rotate="rotateWheel()"
+      @rotate="rotateWheel"
     />
   </div>
 </template>
@@ -77,10 +77,20 @@ export default {
         }
       })
     },
-    rotateWheel() {
-      const tempslice = this.slices.shift()
-      this.slices.push(tempslice)
-      this.wheelOffset++
+    rotateWheel(clockwise) {
+      if (!clockwise) {
+        const tempslice = this.slices.shift()
+        this.slices.push(tempslice)
+        this.wheelOffset++
+      } else {
+        const tempslice = this.slices.pop()
+        this.slices.unshift(tempslice)
+        if (this.wheelOffset > 0) {
+          this.wheelOffset--
+        } else {
+          this.wheelOffset = 37
+        }
+      }
     },
   },
 }
