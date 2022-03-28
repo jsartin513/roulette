@@ -141,15 +141,16 @@ export default {
       return {
         chart: {
           type: 'pie',
-          plotBackgroundColor: null,
-          plotBorderWidth: null,
-          plotShadow: false,
+          plotBackgroundColor: '#CCCCCC',
+          plotBorderWidth: 1,
+          plotShadow: true,
         },
         tooltip: false,
         title: null,
         plotOptions: {
           pie: {
             allowPointSelect: false,
+            innerSize: '80%',
             dataLabels: {
               enabled: true,
               format: '{point.name}',
