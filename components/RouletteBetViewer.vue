@@ -1,6 +1,15 @@
 <template>
   <div class="content flex flex-row">
     <betTypes
+      v-if="false"
+      :bet-types="betTypes"
+      :selected-bet-type="selectedBetType"
+      @selectBetType="selectBetType"
+      @clearBet="selectBetType(-1)"
+    />
+    <usualBoard v-if="false" :slices="slices" />
+    <sharedColumn
+      :slices="slices"
       :bet-types="betTypes"
       :selected-bet-type="selectedBetType"
       @selectBetType="selectBetType"
@@ -19,12 +28,16 @@ import { createSlices } from '../static/slices'
 import { createBets } from '../static/bets'
 import HighchartsColumn from './HighchartsColumn'
 import BetTypeColumn from './BetTypeColumn'
+import UsualBoardColumn from './UsualBoardColumn'
+import SharedColumn from './SharedColumn'
 
 export default {
   name: 'RouletteWheel',
   components: {
     highcharts: HighchartsColumn,
     betTypes: BetTypeColumn,
+    usualBoard: UsualBoardColumn,
+    sharedColumn: SharedColumn,
   },
   data() {
     return { slices: null, betTypes: null, wheelOffset: 0 }
