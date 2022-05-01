@@ -6,10 +6,16 @@
         v-for="(space, index) in orderedSpaces"
         :key="index"
         :class="`board-space ${space.color}`"
-        @click="selectBet(index)"
       >
         {{ space.number }}
       </div>
+      <div class="col-span-3">First 12</div>
+      <div class="col-span-3">Middle 12</div>
+      <div class="col-span-3">Highest 12</div>
+      <div class="col-span-6 red">Red</div>
+      <div class="col-span-6 black">Black</div>
+      <div class="col-span-6">1-18</div>
+      <div class="col-span-6">19-36</div>
     </div>
   </div>
 </template>
