@@ -1,21 +1,27 @@
 <template>
   <div>
     <h3>Normal Board</h3>
-    <div class="grid grid-cols-12 gap-0">
-      <div
-        v-for="(space, index) in orderedSpaces"
-        :key="index"
-        :class="`board-space ${space.color}`"
-      >
-        {{ space.number }}
+    <div class="outer-board grid grid-cols-13 gap-0">
+      <div class="zero-column grid grid-rows-12">
+        <div class="board-space row-span-3 green-space">0</div>
+        <div class="board-space row-span-3 green-space">00</div>
       </div>
-      <div class="col-span-3">First 12</div>
-      <div class="col-span-3">Middle 12</div>
-      <div class="col-span-3">Highest 12</div>
-      <div class="col-span-6 red">Red</div>
-      <div class="col-span-6 black">Black</div>
-      <div class="col-span-6">1-18</div>
-      <div class="col-span-6">19-36</div>
+      <div class="inner-board col-span-12 grid grid-cols-12 gap-0">
+        <div
+          v-for="(space, index) in orderedSpaces"
+          :key="index"
+          :class="`board-space ${space.color}`"
+        >
+          {{ space.number }}
+        </div>
+        <div class="board-space col-span-4 background">First 12</div>
+        <div class="board-space col-span-4 background">Middle 12</div>
+        <div class="board-space col-span-4 background">Highest 12</div>
+        <div class="board-space col-span-6 red">Red</div>
+        <div class="board-space col-span-6 black">Black</div>
+        <div class="board-space col-span-6 background">1-18</div>
+        <div class="board-space col-span-6 background">19-36</div>
+      </div>
     </div>
   </div>
 </template>
@@ -68,14 +74,7 @@ export default {
 </script>
 
 <style scoped>
-.black {
-  @apply bg-black;
-  @apply text-white;
-}
-.red {
-  background-color: red;
-  color: white;
-}
+
 
 .board-space {
   padding: 1em;
@@ -85,6 +84,24 @@ export default {
   border-width: 1px;
   font-weight: 400;
   overflow: clip;
+}
+
+.black {
+  @apply bg-black;
+  @apply text-white;
+}
+.red {
+  background-color: red;
+  color: white;
+}
+.green-space {
+  background-color: green;
+  color: white;
+  padding: 1em 0.5em;
+}
+.background {
+  background-color: darkgreen;
+  color: lightgray;
 }
 .selectable-bet {
   border-style: solid;
@@ -97,5 +114,8 @@ export default {
 
 .grid-cols-13 {
   grid-template-columns: repeat(13, minmax(0, 1fr));
+}
+.grid-rows-12 {
+  grid-template-rows: repeat(12, minmax(0, 1fr));
 }
 </style>
