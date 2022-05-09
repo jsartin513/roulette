@@ -33,49 +33,45 @@ export default {
   },
   computed: {
     sortedSpaces() {
-      const spaces = [...this.slices.filter((slice) => slice.color !== 'green')];
+      const spaces = [...this.slices.filter((slice) => slice.color !== 'green')]
       return spaces.sort(this.sortingSpaces)
     },
     orderedSpaces() {
-      const spaces = [...this.sortedSpaces];
-      const orderedSpaces = [];
+      const spaces = [...this.sortedSpaces]
+      const orderedSpaces = []
       spaces.forEach((space, index) => {
-        if (space.number % 3 === 0){
+        if (space.number % 3 === 0) {
           orderedSpaces.push(space)
         }
       })
       spaces.forEach((space) => {
-        if (space.number % 3 === 2){
+        if (space.number % 3 === 2) {
           orderedSpaces.push(space)
         }
       })
       spaces.forEach((space) => {
-        if (space.number % 3 === 1){
+        if (space.number % 3 === 1) {
           orderedSpaces.push(space)
         }
       })
-      return orderedSpaces;
-    }
+      return orderedSpaces
+    },
   },
   methods: {
-    sortingSpaces(spaceA, spaceB){
-      const num1 = spaceA.number - 1;
-      const num2 = spaceB.number - 1;
+    sortingSpaces(spaceA, spaceB) {
+      const num1 = spaceA.number - 1
+      const num2 = spaceB.number - 1
       if (num1 % 3 === num2 % 3) {
-        return num1 - num2;
+        return num1 - num2
+      } else {
+        return (num1 % 3) - (num2 % 3)
       }
-      else {
-        return num1 % 3 - num2 % 3;
-      }
-
-    }
-  }
+    },
+  },
 }
 </script>
 
 <style scoped>
-
-
 .board-space {
   padding: 1em;
   border-radius: 1em;
