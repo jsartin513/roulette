@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h3>Normal Board</h3>
     <div class="outer-board grid grid-cols-13 gap-0">
       <div class="zero-column grid grid-rows-12">
         <div class="board-space row-span-3 green-space">00</div>

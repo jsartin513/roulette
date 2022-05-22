@@ -11,9 +11,9 @@
         {{ panel.title }}
       </li>
     </ul>
-    <div class="text-med border-b-2 border-dashed text-right pb-2 my-2">
+    <div class="text-med border-t-2 border-b-2 border-dashed text-right py-2 mb-2">
       <button class="border-2 rounded-lg py-2 px-8" @click="$emit('clearBet')">
-        Clear
+        Clear Bet
       </button>
     </div>
     <usualBoardPane v-if="showUsualBoardPane" :slices="slices" />
